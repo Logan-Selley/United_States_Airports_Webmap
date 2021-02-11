@@ -14,7 +14,6 @@ window.onload = function() {
     var airports = null;
     var markers = L.markerClusterGroup();
     airports = L.geoJson.ajax("assets/airports.geojson", {
-        attribution: 'Airport Data &copy; catalog.data.gov | State Airport Count &copy; Mike Bostock, D3 | Base Map &copy; CartoDB | Made By Logan Selley',
         // set marker id according to Control Tower status
         pointToLayer: function(feature, latlng) {
             var id = 0;
@@ -49,6 +48,7 @@ window.onload = function() {
 
     // Add US-State polygons
     L.geoJson.ajax("assets/us-states.geojson", {
+        attribution: 'Airport Data &copy; catalog.data.gov | State Airport Count &copy; Mike Bostock, D3 | Base Map &copy; CartoDB | Made By Logan Selley',
         style: style
     }).addTo(mymap);
 
