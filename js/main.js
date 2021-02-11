@@ -12,6 +12,7 @@ window.onload = function() {
 
     // add airport points
     var airports = null;
+    var markers = L.markerClusterGroup();
     airports = L.geoJson.ajax("assets/airports.geojson", {
         attribution: 'Airport Data &copy; catalog.data.gov | State Airport Count &copy; Mike Bostock, D3 | Base Map &copy; CartoDB | Made By Logan Selley',
         // set marker id according to Control Tower status
@@ -22,11 +23,13 @@ window.onload = function() {
             } else {
                 id = 1 // no ATC
             }
-            return L.marker(latlng, {
+            marker = L.marker(latlng, {
                 icon: L.divIcon({ // Plane Icon with variable color
                     className: 'fa fa-plane marker-color-' + (id + 1).toString()
                 })
             })
+            markers.addLayer(marker);
+            return marker;
         },
         // add Name popup to each airport point
         onEachFeature: function(feature, layer) {
@@ -34,7 +37,7 @@ window.onload = function() {
         }
     });
     // add airports to map
-    airports.addTo(mymap);
+    markers.addTo(mymap);
 
     // set of colors for airport icons
     var colors = chroma.scale('Set1').mode('lch').colors(2);
